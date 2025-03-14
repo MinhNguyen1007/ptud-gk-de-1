@@ -7,35 +7,35 @@
 
 Ứng dụng blog được xây dựng bằng Flask, cho phép người dùng đăng bài, bình luận và quản lý nội dung với hệ thống phân quyền.
 
-## Cài đặt
+## Cài đặt (PowerShell)
 
 1. Clone repository:
-```bash
-git clone https://github.com/MinhNguyen1007/ptud-gk-de-1/blob/master/README.md
-cd blog-app
+```powershell
+git clone https://github.com/MinhNguyen1007/ptud-gk-de-1.git
+cd ptud-gk-de-1
 ```
 
 2. Tạo môi trường ảo và kích hoạt:
-```bash
+```powershell
 python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
+.\venv\Scripts\Activate.ps1
+
+# Nếu gặp lỗi về Execution Policy, chạy lệnh sau với quyền Administrator:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 3. Cài đặt các thư viện cần thiết:
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
 4. Khởi tạo database:
-```bash
+```powershell
 python reset_db.py
 ```
 
 5. Chạy ứng dụng:
-```bash
+```powershell
 python app.py
 ```
 
