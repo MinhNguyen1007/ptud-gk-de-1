@@ -1,3 +1,7 @@
+# Họ và tên: Nguyễn Tấn Minh
+# MSSV: 22643511
+
+
 # Blog Application
 
 Ứng dụng blog được xây dựng bằng Flask, cho phép người dùng đăng bài, bình luận và quản lý nội dung với hệ thống phân quyền.
@@ -6,7 +10,7 @@
 
 1. Clone repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/MinhNguyen1007/ptud-gk-de-1/blob/master/README.md
 cd blog-app
 ```
 
