@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Comment Management</h1>
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Post</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+        <tr>
+            <td>{{ comment.id }}</td>
+            <td>{{ comment.content[:50] }}...</td>
+            <td>{{ comment.author.username }}</td>
+            <td>{{ comment.post.title }}</td>
+            <td>{{ comment.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>
+                <a href="{{ url_for('delete_comment', comment_id=comment.id) }}"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

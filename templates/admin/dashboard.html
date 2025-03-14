@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+<div class="admin-stats">
+    <div class="stat-box">
+        <h3>Users</h3>
+        <p>Total: {{ users|length }}</p>
+        <a href="{{ url_for('admin_users') }}">Manage Users</a>
+    </div>
+    <div class="stat-box">
+        <h3>Posts</h3>
+        <p>Total: {{ posts|length }}</p>
+        <a href="{{ url_for('admin_posts') }}">Manage Posts</a>
+    </div>
+    <div class="stat-box">
+        <h3>Comments</h3>
+        <p>Total: {{ comments|length }}</p>
+        <a href="{{ url_for('admin_comments') }}">Manage Comments</a>
+    </div>
+</div>
+{% endblock %} 

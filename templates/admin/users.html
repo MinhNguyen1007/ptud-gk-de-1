@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <h2>User Management</h2>
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Current Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <form action="{{ url_for('change_user_role', user_id=user.id) }}" method="POST" class="role-form">
+                        <select name="role" class="role-select">
+                            <option value="viewer" {% if user.role == 'viewer' %}selected{% endif %}>Viewer</option>
+                            <option value="collaborator" {% if user.role == 'collaborator' %}selected{% endif %}>Collaborator</option>
+                            <option value="editor" {% if user.role == 'editor' %}selected{% endif %}>Editor</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Update Role</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 

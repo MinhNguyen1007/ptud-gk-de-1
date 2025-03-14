@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts-container">
+    {% for post in posts %}
+    <article class="post-card">
+        <div class="post-header">
+            <h2 class="post-title">
+                <a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a>
+            </h2>
+            <div class="post-meta">
+                <i class="fas fa-user"></i> {{ post.author.username }}
+                <i class="fas fa-calendar-alt"></i> {{ post.created_at.strftime('%Y-%m-%d') }}
+            </div>
+        </div>
+        {% if post.image_path %}
+        <img src="{{ url_for('static', filename=post.image_path) }}" alt="Post image" class="post-image">
+        {% endif %}
+        <div class="post-content">
+            {{ post.content[:200] }}...
+            <a href="{{ url_for('post_detail', post_id=post.id) }}" class="read-more">Read more</a>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %} 

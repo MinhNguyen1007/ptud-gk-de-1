@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font Awesome cho icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Thanh điều hướng phía trên -->
+    <nav class="top-nav">
+        <div class="nav-brand">Blog</div>
+        <div class="nav-items">
+            <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+            
+            {% if current_user.is_authenticated %}
+                <!-- Hiển thị nút Create Post cho tất cả user đã đăng nhập -->
+                <a href="{{ url_for('create_post') }}" class="nav-link">
+                    <i class="fas fa-plus"></i> Create Post
+                </a>
+                
+                <span class="user-info">
+                    <i class="fas fa-user"></i> 
+                    {{ current_user.username }}
+                    <span class="role-badge role-{{ current_user.role }}">{{ current_user.role }}</span>
+                </span>
+                
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Container chính -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bars"></i> Menu
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="{{ url_for('home') }}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-circle"></i> My Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-book"></i> My Posts
+                        </a>
+                    </li>
+                    {% if current_user.is_admin %}
+                        <li>
+                            <a href="{{ url_for('admin_dashboard') }}">
+                                <i class="fas fa-cog"></i> Admin Dashboard
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Nội dung chính -->
+        <div class="content">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="flash-message">
+                            <i class="fas fa-info-circle"></i> {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html> 
