@@ -15,7 +15,7 @@ Trang đăng ký sẽ tạo tài khoản cho người dùng
 
 Khi đăng ký xong tài khoản đó mặc định là viewer
 
-Người đăng bài sẽ là author (tức là user bất kì đăng bài thì user đó là author của bài blog đó, vì là tác giả cảu bài đăng nên họ có khả năng xóa hoặc edit bài của họ trong phần read more)
+Người đăng bài sẽ là author (tức là user bất kì đăng bài thì user đó là author của bài blog đó, vì là tác giả của bài đăng nên họ có khả năng xóa hoặc edit bài của họ trong phần read more)
 
 User được quyền đăng bài, comment
 
