@@ -1,88 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Blog</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Font Awesome cho icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Thanh điều hướng phía trên -->
-    <nav class="top-nav">
-        <div class="nav-brand">Blog</div>
-        <div class="nav-items">
-            <a href="{{ url_for('home') }}" class="nav-link">Home</a>
-            
-            {% if current_user.is_authenticated %}
-                <!-- Hiển thị nút Create Post cho tất cả user đã đăng nhập -->
-                <a href="{{ url_for('create_post') }}" class="nav-link">
-                    <i class="fas fa-plus"></i> Create Post
-                </a>
-                
-                <span class="user-info">
-                    <i class="fas fa-user"></i> 
-                    {{ current_user.username }}
-                    <span class="role-badge role-{{ current_user.role }}">{{ current_user.role }}</span>
-                </span>
-                
-                <a href="{{ url_for('logout') }}" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            {% else %}
-                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
-                <a href="{{ url_for('register') }}" class="nav-link">Register</a>
-            {% endif %}
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-blog"></i> Blog App
+            </a>
+            <div class="nav-links">
+                {% if current_user.is_authenticated %}
+                    {% if current_user.role == 'admin' %}
+                        <a class="nav-link" href="{{ url_for('admin_users') }}">
+                            <i class="fas fa-users-cog"></i> Admin Panel
+                        </a>
+                    {% endif %}
+                    <a class="nav-link" href="{{ url_for('create_post') }}">
+                        <i class="fas fa-plus-circle"></i> New Post
+                    </a>
+                    <a class="nav-link" href="{{ url_for('logout') }}">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                    <span class="nav-link">
+                        <i class="fas fa-user"></i> 
+                        {{ current_user.username }}
+                        <span class="role-badge role-{{ current_user.role }}">
+                            {{ current_user.role }}
+                        </span>
+                    </span>
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('login') }}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a class="nav-link" href="{{ url_for('register') }}">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 
-    <!-- Container chính -->
-    <div class="main-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <i class="fas fa-bars"></i> Menu
-            </div>
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="{{ url_for('home') }}">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                </li>
-                {% if current_user.is_authenticated %}
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-user-circle"></i> My Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-book"></i> My Posts
-                        </a>
-                    </li>
-                    {% if current_user.is_admin %}
-                        <li>
-                            <a href="{{ url_for('admin_dashboard') }}">
-                                <i class="fas fa-cog"></i> Admin Dashboard
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endif %}
-            </ul>
-        </div>
+    <div class="container fade-in">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        <!-- Nội dung chính -->
-        <div class="content">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="flash-message">
-                            <i class="fas fa-info-circle"></i> {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            {% block content %}{% endblock %}
-        </div>
+        {% block content %}{% endblock %}
     </div>
+
+    <script>
+        // Tự động ẩn flash messages sau 5 giây
+        setTimeout(function() {
+            let alerts = document.getElementsByClassName('alert');
+            for(let alert of alerts) {
+                alert.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 </body>
 </html> 
