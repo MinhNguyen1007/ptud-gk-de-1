@@ -10,16 +10,19 @@
 # Ý tưởng:
 
 Tạo trang blog với giao diện chung để xem cái bài viết có thể comment khi có tài khoản
+
 Trang đăng ký sẽ tạo tài khoản cho người dùng
+
 Khi đăng ký xong tài khoản đó mặc định là viewer
+
 Người đăng bài sẽ là author (tức là user bất kì đăng bài thì user đó là author của bài blog đó, vì là tác giả cảu bài đăng nên họ có khả năng xóa hoặc edit bài của họ trong phần read more)
 
 User được quyền đăng bài, comment
 
 Các tài khoản có 3 loại và có vai trò khác nhau: 
-    o Viewer: view only 
-    o Collaborator: can edit, can’t delelte 
-    o Editor: view, edit, delete permission 
+    - Viewer: view only 
+    - Collaborator: can edit, can’t delelte 
+    - Editor: view, edit, delete permission 
 
 Nếu muốn đổi thành các loại user khác buộc phải thông qua ADMIN để có được vai trò đó
 
