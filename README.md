@@ -32,7 +32,7 @@ Tài khoản ADMIN mặc định:
 
 ADMIN có chức năng quản lý các user, bài viết, comment, đổi vai trò user thành các loại khác, khóa account, reset mật khẩu, edit hoặc xóa bài viết
 
-Về phần random, do chưa nắm rõ yêu cầu nên ý tưởng ở đây là tải các ảnh đã random về và lưu trong static để lấy các ảnh đó để đăng ảnh chứ không phải mở link ra sẽ hiển thị các ảnh tự random sẵn
+Về phần random, do chưa nắm rõ yêu cầu nên ý tưởng ở đây là tải các ảnh đã random về và lưu trong static để lấy các ảnh đó để đăng ảnh chứ không phải mở link hostlocal ra sẽ hiển thị các ảnh tự random sẵn
 
 ## Cài đặt (PowerShell)
 
